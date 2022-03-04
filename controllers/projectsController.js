@@ -1,3 +1,7 @@
 exports.projectsHome = (req, res)=> {
-   res.send('hola');    
+   res.render('index');    
+}
+
+exports.nosotros = (req, res)=> {
+   res.render('nosotros');    
 }
