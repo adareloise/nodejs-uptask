@@ -4,6 +4,28 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        link(rel="stylesheet", href="/css/normalize.css")
+        link(rel="stylesheet", href="/css/app.css")
+        title= nombrePagina
     body 
-        block contenido 
+        header.barra 
+            h1 UpTask - Administrador de Proyectos
+            a(href="#") Cerrar Sesion
+
+        main.contenedor
+            aside.contenedor-proyectos
+                .panel.crear-proyecto
+                    a(href="/nuevo-proyecto" class="boton") New Project
+                        span +
+                .panel.lista-proyectos
+                    ul#proyectos.proyectos 
+                        li 
+                            a(href="#") Diseño Store Web 
+                        li 
+                            a(href="#") Diseño Blog
+                        li 
+                            a(href="#") Diseño Logotipo
+            
+            block contenido
+            
+            
