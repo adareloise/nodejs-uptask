@@ -4,6 +4,8 @@ const router = express.Router();
 //import  Controller
 const projectsController =  require ('../controllers/projectsController');
 
+const {body} = require('express-validator/check');
+
 module.exports = function(){
 
    // Rutas
@@ -11,7 +13,9 @@ module.exports = function(){
    
    router.get('/nuevo-proyecto', projectsController.formularioProyecto);
 
-   router.post('/nuevo-proyecto', projectsController.nuevoProyecto);
+   router.post('/nuevo-proyecto', 
+      body('nombre').not().isEmpty().trim().escape(),
+      projectsController.nuevoProyecto);
 
    return router;
 }
