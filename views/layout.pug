@@ -9,23 +9,23 @@ html(lang="en")
         title= nombrePagina
     body 
         header.barra 
-            h1 UpTask - Administrador de Proyectos
+            h1 Adareloise - Administrador de Proyectos #{year}
             a(href="#") Cerrar Sesion
 
         main.contenedor
             aside.contenedor-proyectos
                 .panel.crear-proyecto
-                    a(href="/nuevo-proyecto" class="boton") New Project
+                    a(href="/nuevo-proyecto" class="boton") Project
                         span +
                 .panel.lista-proyectos
+                    h2 Proyectos 
                     ul#proyectos.proyectos 
-                        li 
-                            a(href="#") Diseño Store Web 
-                        li 
-                            a(href="#") Diseño Blog
-                        li 
-                            a(href="#") Diseño Logotipo
-            
+                        if(projects.length)
+                            each project in projects 
+                                li 
+                                    a(href=`/proyectos/${project.url}}`)= project.nombre  
+                                
+                            
             block contenido
             
-            
+            //- pre= vardump(proyectos)

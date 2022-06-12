@@ -9,13 +9,14 @@ const {body} = require('express-validator/check');
 module.exports = function(){
 
    // Rutas
-   router.get('/', projectsController.projectsHome);
+   router.get('/', projectsController.projectHome);
    
-   router.get('/nuevo-proyecto', projectsController.formularioProyecto);
+   router.get('/nuevo-proyecto', projectsController.projectForm);
 
    router.post('/nuevo-proyecto', 
       body('nombre').not().isEmpty().trim().escape(),
-      projectsController.nuevoProyecto);
+      projectsController.ProjectNew);
 
+   router.get('/proyectos/:url', projectsController.projectUrl);
    return router;
 }
