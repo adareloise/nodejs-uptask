@@ -15,7 +15,7 @@ html(lang="en")
         main.contenedor
             aside.contenedor-proyectos
                 .panel.crear-proyecto
-                    a(href="/nuevo-proyecto" class="boton") Project
+                    a(href="/nuevo-proyecto" class="boton") Agregar Nuevo
                         span +
                 .panel.lista-proyectos
                     h2 Proyectos 
@@ -23,7 +23,7 @@ html(lang="en")
                         if(projects.length)
                             each project in projects 
                                 li 
-                                    a(href=`/proyectos/${project.url}}`)= project.nombre  
+                                    a(href=`/proyectos/${project.url}`)= project.nombre  
                                 
                             
             block contenido

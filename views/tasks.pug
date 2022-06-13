@@ -1,6 +1,16 @@
 extends layout 
 
 block contenido  
-   .contenido-principal   
-      h1= nombrePagina 
+   .contenido-principal 
+      h1= namePag  
+      h1= project.nombre
       
+      // form 
+
+      // list
+      // pre= vardump(project)
+
+      // accion 
+      .contenedor-acciones
+         a(href=`/proyectos/editar/${project.id}` class="boton") Editar  
+         button#eliminar-proyecto(type="button" class="boton eliminar") Eliminar
