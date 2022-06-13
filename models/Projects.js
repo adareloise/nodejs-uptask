@@ -6,15 +6,15 @@ const db = require('../config/db');
 // Entity create 
 const Projects = db.define('proyectos', {
       id: {
-         type: Sequelize.INTEGER,
+         type: Sequelize.INTEGER(11),
          primaryKey: true,
          autoIncrement: true
       },
       nombre: {
-         type: Sequelize.STRING
+         type: Sequelize.STRING(100)
       },
       url:  {
-         type: Sequelize.STRING
+         type: Sequelize.STRING(100)
       },
    },
    {

@@ -1,4 +1,5 @@
 const Projects = require('../models/Projects')
+const Tasks = require('../models/Tasks')
 
 // Home
 exports.projectHome = async (req, res)=> {
@@ -40,7 +41,7 @@ exports.projectNew  = async (req, res)=> {
       res.render('new-project', {
          nombrePagina  : 'Nuevo Proyecto', 
          errores, projects
-      })   
+      })    
    }
 }
 
@@ -55,12 +56,19 @@ exports.projectUrl = async (req, res, next) => {
 
    const [projects, project] = await Promise.all([projectsPromise, projectPromise])
 
+   // extract tasks
+   const tasks = await Tasks.findAll({
+      where: { 
+         proyectoId : project.id
+      }
+   })
+
    if(!project) return next();
    
    // render to view 
    res.render('tasks', {
       namePag : 'Tareas del Proyecto',
-      project, projects
+      project, projects, tasks
    })
 }
 

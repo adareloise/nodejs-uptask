@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const {body} = require('express-validator/check');
 
-//import  Controller
+//import  Controllers
 const projectsController =  require ('../controllers/projectsController');
+const tasksController =  require ('../controllers/tasksController');
 
 // Rutas
 module.exports = function(){
@@ -11,7 +12,8 @@ module.exports = function(){
    // Home
    router.get('/', projectsController.projectHome);
    
-   // Render new project
+   /* Projects
+      Render new project */
    router.get('/nuevo-proyecto', projectsController.projectForm);
 
    // create 
@@ -27,11 +29,15 @@ module.exports = function(){
    // search unique url  
    router.get('/proyectos/:url', projectsController.projectUrl);
 
-   // search by id 
    router.get('/proyectos/editar/:id', projectsController.projectFormEdit);
+   // search by id 
 
    // delete
    router.delete('/proyectos/:url', projectsController.projectDelete)
 
+   /* Tasks
+      Add Task */
+   router.post('/proyectos/:url', tasksController.addTask)
+   
    return router;
 }

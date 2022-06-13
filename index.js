@@ -11,7 +11,9 @@ const db = require('./config/db');
 
 // import models
 require('./models/Projects');
+require('./models/Tasks');
 
+// Sincronized dbs
 db.sync()
    .then(() => {
       console.log('Contectado al servidor')
