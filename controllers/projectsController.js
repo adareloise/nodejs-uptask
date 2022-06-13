@@ -10,7 +10,7 @@ exports.projectHome = async (req, res)=> {
    });    
 }
 
-// Nuevo formulario
+// Form new project
 exports.projectForm = async (req, res)=> {
    const projects  = await Projects.findAll();
   
@@ -19,12 +19,12 @@ exports.projectForm = async (req, res)=> {
    });
 }
 
-// Nuevo proyecto
+// New project
 exports.projectNew  = async (req, res)=> {
 
    const projects  = await Projects.findAll();
    
-   // validacion manual 
+   // Validation 
    const {nombre} = req.body;
    let errores = []
 
@@ -35,7 +35,7 @@ exports.projectNew  = async (req, res)=> {
       res.redirect('/');
    }  
   
-   // Mappeo de errores
+   // Errors mapping
    if(errores.length>0){
       res.render('new-project', {
          nombrePagina  : 'Nuevo Proyecto', 
@@ -44,7 +44,7 @@ exports.projectNew  = async (req, res)=> {
    }
 }
 
-// Render proyecto por url 
+// Find project param url 
 exports.projectUrl = async (req, res, next) => {
    const projectsPromise = Projects.findAll();
    const projectPromise = Projects.findOne({
@@ -57,14 +57,14 @@ exports.projectUrl = async (req, res, next) => {
 
    if(!project) return next();
    
-   // reder a la vista 
+   // render to view 
    res.render('tasks', {
       namePag : 'Tareas del Proyecto',
       project, projects
    })
 }
 
-// Editar proyecto existente
+// Edit project
 exports.projectFormEdit= async (req, res) => {
    const projectsPromise = Projects.findAll();
    const projectPromise = Projects.findOne({
@@ -75,35 +75,26 @@ exports.projectFormEdit= async (req, res) => {
 
    const [projects, project] = await Promise.all([projectsPromise, projectPromise])
    
-   // reder a la vista 
+   // render to view 
    res.render('new-project', {
       namePag : 'Editar Proyecto',
       projects, project
    })  
 }
 
-// Nuevo formulario
-exports.projectForm = async (req, res)=> {
-   const projects  = await Projects.findAll();
-  
-   res.render('new-project', {
-         nombrePagina: 'Proyectos', projects
-   });
-}
-
-// Nuevo proyecto
+// Project update param id
 exports.projectUpdate  = async (req, res)=> {
 
    const projects  = await Projects.findAll();
    
-   // validacion manual 
+   // Validation 
    const {nombre} = req.body;
    let errores = []
 
    if(!nombre){
       errores.push({'texto': 'Agrega un nombre al proyecto'})
    }else{
-      //insertar
+      //insert
       await Projects.update(
             {  nombre: nombre },
             {  where:   {id: req.params.id } }   
@@ -112,11 +103,28 @@ exports.projectUpdate  = async (req, res)=> {
       res.redirect('/');
    }
    
-   // Mappeo de errores
+   // Errors mapping
    if(errores.length>0){
       res.render('new-project', {
          nombrePagina  : 'Nuevo Proyecto', 
          errores, projects
       })   
    }
+}
+
+// Delete project
+exports.projectDelete = async (req, res, next) => {   
+   
+   const {projectUrl} = req.query;
+   
+   const result = await Projects.destroy({
+      where: {url: projectUrl}
+   })
+
+   // Exception manager
+   if(!result){   
+      return next();
+   }
+
+   res.status(200).send('Proyecto eliminado correctamente')
 }

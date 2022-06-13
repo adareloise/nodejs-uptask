@@ -3,7 +3,7 @@ const routes = require('./routes');
 const path = require('path')
 const bodyParser = require('body-parser');
 
-// Helpers con algunas funciones 
+// Helpers printer json  
 const helpers = require('./helpers')
 
 // Create conexion db
@@ -23,33 +23,33 @@ db.sync()
 // Create app
 const app = express();
 
-// Cargar archivos estaticos
+// Load static folder
 app.use(express.static('public'));
 
-// Habilitar pug
+// Enable Pug view
 app.set('view engine', 'pug');
 
-// Agregar vista
+// Add directory view
 app.set('views', path.join(__dirname, './views'))
 
-// Pasar var dump a la app
-
+// Include vardump in app
 app.use((req, res, next) => {
    res.locals.vardump = helpers.vardump;
    next();
 });
 
-// Fecha local
+// local date
 app.use((req, res, next) => {
    const fecha = new Date();
    res.locals.year = fecha.getFullYear();
    next();
 });
 
-// habilitar bodyParser para leer datos del formulario
+// Enable bodyParser for read data in forms 
 app.use(bodyParser.urlencoded({extended: true}))
 
-// habilitar rutas
+// Enable rutes
 app.use('/', routes())
 
+// Port config
 app.listen(3000);

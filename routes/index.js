@@ -8,8 +8,10 @@ const projectsController =  require ('../controllers/projectsController');
 // Rutas
 module.exports = function(){
 
+   // Home
    router.get('/', projectsController.projectHome);
    
+   // Render new project
    router.get('/nuevo-proyecto', projectsController.projectForm);
 
    // create 
@@ -22,11 +24,14 @@ module.exports = function(){
       body('nombre').not().isEmpty().trim().escape(),
       projectsController.projectUpdate);
 
-   // search unique url 
+   // search unique url  
    router.get('/proyectos/:url', projectsController.projectUrl);
 
    // search by id 
    router.get('/proyectos/editar/:id', projectsController.projectFormEdit);
+
+   // delete
+   router.delete('/proyectos/:url', projectsController.projectDelete)
 
    return router;
 }
