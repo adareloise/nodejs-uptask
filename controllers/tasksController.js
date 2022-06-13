@@ -27,3 +27,27 @@ exports.addTask = async (req, res, next) => {
     // Render
     res.redirect(`/proyectos/${req.params.url}`)
 }
+
+exports.changeState = async (req, res, next) => {
+    const {id} = req.params;
+    const task = await Tasks.findOne({ where: {id} })
+
+    //
+    let status = 0;
+    
+    if(task.estado === status){
+        status = 1;
+    }
+
+    task.estado = status;
+
+    const result = await task.save();
+
+    if(!result) return next();
+
+    res.status(200).send('Actualizado');
+}
+
+exports.deleteTask = async (req, res, next) => {
+    res.send('eliminando')
+}

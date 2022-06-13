@@ -17,7 +17,7 @@ block contenido
          ul
            if tasks.length 
             each task in tasks 
-               li.tarea 
+               li.tarea(data-task=task.id) 
                   p= task.tarea
                   .acciones
                         if task.estado

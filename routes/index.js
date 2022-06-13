@@ -30,14 +30,20 @@ module.exports = function(){
    router.get('/proyectos/:url', projectsController.projectUrl);
 
    router.get('/proyectos/editar/:id', projectsController.projectFormEdit);
+   
    // search by id 
-
    // delete
-   router.delete('/proyectos/:url', projectsController.projectDelete)
+   router.delete('/proyectos/:url', projectsController.projectDelete);
 
    /* Tasks
       Add Task */
-   router.post('/proyectos/:url', tasksController.addTask)
+   router.post('/proyectos/:url', tasksController.addTask);
    
+   // Update
+   router.patch('/tareas/:id', tasksController.changeState);
+
+   // Delete
+   router.delete('/tareas/:id', tasksController.deleteTask);
+
    return router;
 }
