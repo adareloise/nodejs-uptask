@@ -45,9 +45,15 @@ if(tasks){
                     .then(function(res){
                         console.log(res);
 
-                        /*if(res.status === 200){
-                            icon.classList.toggle('completo');
-                        }*/
+                        if(res.status === 200){
+                            taskHTML.parentElement.removeChild(taskHTML);
+                            Swal.fire(
+                                'Eliminado!',
+                                res.data,
+                                'success'
+                            );
+                        }
+
                     })
                 }
               })

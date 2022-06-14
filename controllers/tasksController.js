@@ -32,7 +32,7 @@ exports.changeState = async (req, res, next) => {
     const {id} = req.params;
     const task = await Tasks.findOne({ where: {id} })
 
-    //
+    //Confirm status
     let status = 0;
     
     if(task.estado === status){
@@ -49,5 +49,12 @@ exports.changeState = async (req, res, next) => {
 }
 
 exports.deleteTask = async (req, res, next) => {
-    res.send('eliminando')
+    const {id} = req.params;
+
+    //Confirm status
+    const result = await Tasks.destroy({ where: { id } });
+
+    if(!result) return next();
+
+    res.status(200).send('Eliminado correctamente');
 }
