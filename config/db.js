@@ -1,8 +1,13 @@
 const Sequelize = require('sequelize');
+const dotenv = require('dotenv');
 
-const db = new Sequelize('db_upTask', 'uptask', 'uptask{}963',
+dotenv.config({path: '.env'})
+
+const db = new Sequelize(process.env.BD_NAME, 
+   process.env.BD_DATABASE, 
+   process.env.BD_PASS,
    {
-      host: '137.184.115.179',
+      host: process.env.BD_HOST,
       dialect: 'mysql',
       port: 3306,
       operatorsAliases: false,
