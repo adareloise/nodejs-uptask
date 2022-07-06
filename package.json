@@ -23,6 +23,8 @@
     "concurrently": "^7.2.1",
     "dotenv": "^16.0.1",
     "express": "^4.17.2",
+
+    
     "express-validator": "^6.14.1",
     "mysql2": "^2.3.3",
     "pug": "^3.0.2",
